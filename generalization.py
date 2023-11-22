@@ -92,12 +92,13 @@ def check_inconsistency_for_rules(r_list) -> bool: # Checking for inconsistency 
     r_list = list(r_list)
     if len(r_list) == 0 or len(r_list) == 1:
         return False
-    syms = []
-    for r in r_list:
-        syms.append(convert_rule_to_sympy_rule(r))
-    logical_expression = sympy.And(*syms)
-    simplified_expression = sympy.simplify(logical_expression)
-    return simplified_expression == False
-    
-def convert_rule_to_sympy_rule(r:Rule):
-    return sympy.simplify(r.head[0])
+    for r1 in r_list:
+        for r2 in r_list:
+            if r1 == r2:
+                continue
+            head1, head2 = r1.head[0], r2.head[0]
+            if r1 == None or r2 == None:
+                return True
+            if head1 == head2 and head1.neg != head2.neg:
+                return True
+    return False
