@@ -423,7 +423,7 @@ def select_itemsKB_for_user(KBpath, items, predicates:dict, instances:dict, inst
 
 def LFIO(E:list,B,des="LFIO_KG progress"):
     P = set()
-    for I, O in tqdm(E, ):
+    for I, O in tqdm(E, desc=des):
         if B == [] or B == None:
             M = P
         else:

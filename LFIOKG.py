@@ -16,7 +16,7 @@ O = set()
 E = []
 E_general = []
 
-if __main__ == "__main__":
+if __name__ == '__main__':
     assert len(sys.argv) >=3, "Please provide input file, output file and ml-100k background file"
     assert os.path.isfile(sys.argv[0]), "Input file does not exist"
     assert os.path.isfile(sys.argv[1]), "Output file does not exist"
@@ -37,6 +37,8 @@ if __main__ == "__main__":
     B = list([]) # B is empty because here we do not add any backgrpund rules
     P = LFIO(E, B,"LFIOKG without generalisation running...")
     P_general = LFIO(E_general, B,"LFIOKG with generalisation running...")
+    print("Check inconsistency for rules without generalisation:", str(check_inconsistency_for_rules(P)))
+    print("Check inconsistency for rules with generalisation:", str(check_inconsistency_for_rules(P_general)))
     r11,r12,r13 = reproduce(P, E)
     r21,r22,r23 = reproduce_general(P_general, E)
     print("Evaluation results without generalisation:")

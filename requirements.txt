@@ -1,0 +1,4 @@
+pandas
+pydot
+networkx
+tqdm

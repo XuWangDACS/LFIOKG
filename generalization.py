@@ -1,4 +1,5 @@
 from LFIO_KG import *
+import sympy
 
 def generalize_rule_set(rule_set):
     assert isinstance(rule_set, list) or isinstance(rule_set, set)
@@ -85,3 +86,18 @@ def generalize_atoms(atom1: Predicate, atom2: Predicate):
             substitution[new_var] = (arg1, arg2)
 
     return Predicate(atom1.name, *new_args), substitution
+
+def check_inconsistency_for_rules(r_list) -> bool: # Checking for inconsistency between two logic rules involves determining whether there is a conflict in the statements or propositions they represent.  If there is a conflict, the rules are inconsistent.
+    assert isinstance(r_list, list) or isinstance(r_list, set)
+    r_list = list(r_list)
+    if len(r_list) == 0 or len(r_list) == 1:
+        return False
+    syms = []
+    for r in r_list:
+        syms.append(convert_rule_to_sympy_rule(r))
+    logical_expression = sympy.And(*syms)
+    simplified_expression = sympy.simplify(logical_expression)
+    return simplified_expression == False
+    
+def convert_rule_to_sympy_rule(r:Rule):
+    return sympy.simplify(r.head[0])
