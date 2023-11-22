@@ -2,3 +2,4 @@ pandas
 pydot
 networkx
 tqdm
+sympy
