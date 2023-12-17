@@ -8,7 +8,7 @@ pip install -r requirements.txt
 
 ### Use your own data
 ```
-python LFIOKG.py "path_to_input_file" "path_to_output_file" "path_to_background_file"
+python LFIOKG.py "path_to_input_file" "path_to_output_file" "path_to_background_KG_file"
 ```
 
 ### Reproduce the paper experiments
